@@ -13,28 +13,28 @@ pipeline {
         stage('Restore') {
             steps {
                 echo 'Restaurando dependencias...'
-                bat 'dotnet restore ProyectoJenkins.slnx'
+                sh 'dotnet restore ProyectoJenkins.slnx'
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Compilando la solución...'
-                bat 'dotnet build ProyectoJenkins.slnx --no-restore --configuration Release'
+                sh 'dotnet build ProyectoJenkins.slnx --no-restore --configuration Release'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Ejecutando pruebas unitarias...'
-                bat 'dotnet test ProyectoJenkins.slnx --no-build --configuration Release --verbosity normal'
+                sh 'dotnet test ProyectoJenkins.slnx --no-build --configuration Release --verbosity normal'
             }
         }
 
         stage('Publish') {
             steps {
                 echo 'Publicando la aplicación...'
-                bat 'dotnet publish mi-proyecto/mi-proyecto.csproj --no-build --configuration Release --output ./publish'
+                sh 'dotnet publish mi-proyecto/mi-proyecto.csproj --no-build --configuration Release --output ./publish'
             }
         }
 
